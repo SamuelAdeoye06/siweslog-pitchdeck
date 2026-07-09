@@ -1,0 +1,492 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  html, body, #root {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+  }
+  body {
+    overflow: hidden;
+    background: #080F1F;
+  }
+</style>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script>
+const { useState, useEffect, useCallback } = React;
+const N='#080F1F',B='#4F8EF7',W='#FFFFFF',G='#94A3B8',GR='#10B981';
+const FOUNDER_PHOTO='./samuel_adeoye.jpg';
+
+const slides = [
+  {
+    bg: N,
+    render: () => React.createElement('div',{style:{minHeight:'100%',display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',textAlign:'center',padding:'40px 60px'}},
+      React.createElement('div',{style:{fontSize:12,color:B,fontWeight:700,letterSpacing:'0.15em',textTransform:'uppercase',marginBottom:20}},'Hackaholics Startup Pitch'),
+      React.createElement('div',{style:{fontSize:68,fontWeight:900,color:W,letterSpacing:-2,lineHeight:1,marginBottom:16}},
+        'SIWES',React.createElement('span',{style:{color:B}},'log')),
+      React.createElement('div',{style:{fontSize:22,fontWeight:700,color:W,marginBottom:16,lineHeight:1.3}},'Digital Infrastructure for SIWES Management'),
+      React.createElement('div',{style:{fontSize:15,color:G,maxWidth:500,lineHeight:1.7}},'Digitizing SIWES logbooks, placement records, supervisor approvals, and institution-level oversight in one role-based platform.'),
+      React.createElement('a',{href:'https://siweslog.com',target:'_blank',style:{marginTop:32,padding:'10px 28px',background:B,borderRadius:6,fontSize:13,fontWeight:700,color:W,textDecoration:'none',display:'inline-block'}},'siweslog.com →')
+    )
+  },
+  {
+    bg:'#080F1A',
+    render: () => React.createElement('div',{style:{minHeight:'100%',display:'flex',flexDirection:'column',justifyContent:'center',padding:'40px 56px'}},
+      React.createElement('div',{style:{fontSize:11,color:B,fontWeight:700,letterSpacing:'0.15em',textTransform:'uppercase',marginBottom:10}},'The Problem'),
+      React.createElement('div',{style:{fontSize:30,fontWeight:800,color:W,lineHeight:1.2,marginBottom:32}},"SIWES is a structured national programme, but the workflow is still managed like paperwork."),
+      React.createElement('div',{style:{display:'grid',gridTemplateColumns:'1fr 1fr',gap:14}},
+        ...[
+          {icon:'📋',t:'Paper is fragile',d:'Physical logbooks can be lost, damaged, delayed, or submitted incomplete. Once the record is gone, there is no system backup.'},
+          {icon:'🔍',t:'Schools lack live visibility',d:'IT units need to know who has registered, where students are placed, who supervises them, and which logbooks are moving.'},
+          {icon:'✍️',t:'Approvals are hard to coordinate',d:'Students depend on busy industry supervisors and academic supervisors to review the right entries at the right time.'},
+          {icon:'📊',t:'Records are difficult to audit',d:'Manual signatures and paper submissions make it hard to track status, timestamps, comments, and responsibility across the SIWES lifecycle.'},
+        ].map(({icon,t,d}) => React.createElement('div',{key:t,style:{background:'rgba(255,255,255,0.04)',borderRadius:10,padding:'16px 18px',border:'1px solid rgba(255,255,255,0.07)'}},
+          React.createElement('div',{style:{fontSize:22,marginBottom:8}},icon),
+          React.createElement('div',{style:{fontSize:12,fontWeight:700,color:W,marginBottom:5}},t),
+          React.createElement('div',{style:{fontSize:11,color:G,lineHeight:1.6}},d)
+        ))
+      )
+    )
+  },
+  {
+    bg:'#0A0A1F',
+    render: () => React.createElement('div',{style:{minHeight:'100%',display:'flex',flexDirection:'column',justifyContent:'center',padding:'40px 56px'}},
+      React.createElement('div',{style:{fontSize:11,color:B,fontWeight:700,letterSpacing:'0.15em',textTransform:'uppercase',marginBottom:10}},'Designed for Institutional Scale'),
+      React.createElement('div',{style:{fontSize:28,fontWeight:800,color:W,lineHeight:1.2,marginBottom:32}},'The product is built around a recurring, institution-wide workflow.'),
+      React.createElement('div',{style:{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:12,marginBottom:28}},
+        ...[
+          {v:'5',l:'Role types modeled in the platform'},
+          {v:'1',l:'School workspace per institution'},
+          {v:'1–52',l:'Configurable SIWES duration in weeks'},
+          {v:'2-step',l:'Industry approval plus school sign-off'},
+        ].map(({v,l}) => React.createElement('div',{key:v,style:{background:'rgba(79,142,247,0.08)',border:'1px solid rgba(79,142,247,0.2)',borderRadius:10,padding:'18px 12px',textAlign:'center'}},
+          React.createElement('div',{style:{fontSize:26,fontWeight:900,color:B,lineHeight:1}},v),
+          React.createElement('div',{style:{fontSize:11,color:G,marginTop:8,lineHeight:1.5}},l)
+        ))
+      ),
+      React.createElement('div',{style:{background:'rgba(255,255,255,0.04)',borderLeft:`3px solid ${B}`,padding:'16px 20px',borderRadius:'0 8px 8px 0'}},
+        React.createElement('div',{style:{fontSize:13,color:'#CBD5E1',lineHeight:1.65,fontStyle:'italic'}},'SIWESlog turns the logbook from a physical artifact into a live operational record: who registered, where they are placed, what they submitted, who approved it, and what still needs attention.'),
+        React.createElement('div',{style:{fontSize:11,color:G,marginTop:6}},'— Product direction reflected in the current models, routes, and dashboards')
+      )
+    )
+  },
+  {
+    bg:'#F8FAFF',
+    render: () => React.createElement('div',{style:{minHeight:'100%',display:'flex',flexDirection:'column',justifyContent:'center',padding:'40px 56px'}},
+      React.createElement('div',{style:{fontSize:11,color:B,fontWeight:700,letterSpacing:'0.15em',textTransform:'uppercase',marginBottom:10}},'The Solution'),
+      React.createElement('div',{style:{fontSize:28,fontWeight:800,color:N,lineHeight:1.2,marginBottom:8}},'SIWESlog digitizes the SIWES logbook workflow end to end.'),
+      React.createElement('div',{style:{fontSize:14,color:'#475569',marginBottom:14,lineHeight:1.65}},'A cloud-based, multi-tenant SaaS platform built for school onboarding, student registration, placement tracking, weekly logs, supervisor approvals, and PDF export.'),
+      React.createElement('a',{href:'https://siweslog.com',target:'_blank',rel:'noreferrer',style:{fontSize:12,color:B,fontWeight:800,textDecoration:'none',marginBottom:24,display:'inline-block'}},'Live product: siweslog.com →'),
+      React.createElement('div',{style:{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:12}},
+        ...[
+          {icon:'🎓',role:'Students',desc:'Create placement profiles, add industry supervisors, fill weekly logs, attach evidence, and track progress by week'},
+          {icon:'🏭',role:'Industry supervisors',desc:'Review submitted weeks through a secure email approval link without creating an account'},
+          {icon:'🏫',role:'School supervisors',desc:'Monitor assigned students, review approved weeks, add comments, sign off logs, and record visits'},
+          {icon:'👨‍💼',role:'IT Admins',desc:'Manage students and school supervisors, approve supervisors, assign students, and review placement records'},
+          {icon:'⚡',role:'Super Admin',desc:'Approve institutions, manage school status, view platform-wide usage, and control subscription plan labels'},
+          {icon:'📄',role:'PDF export',desc:'Generate a PDF logbook from approved weekly entries for end-of-training submission workflows'},
+        ].map(({icon,role,desc}) => React.createElement('div',{key:role,style:{background:W,border:'1px solid #E2E8F0',borderRadius:10,padding:'14px 16px'}},
+          React.createElement('div',{style:{fontSize:20,marginBottom:8}},icon),
+          React.createElement('div',{style:{fontSize:12,fontWeight:700,color:N,marginBottom:4}},role),
+          React.createElement('div',{style:{fontSize:11,color:'#64748B',lineHeight:1.55}},desc)
+        ))
+      )
+    )
+  },
+  {
+    bg:N,
+    render: () => React.createElement('div',{style:{minHeight:'100%',display:'flex',flexDirection:'column',justifyContent:'center',padding:'40px 56px'}},
+      React.createElement('div',{style:{fontSize:11,color:B,fontWeight:700,letterSpacing:'0.15em',textTransform:'uppercase',marginBottom:10}},'How It Works'),
+      React.createElement('div',{style:{fontSize:28,fontWeight:800,color:W,lineHeight:1.2,marginBottom:36}},'One platform. Every stakeholder. A verifiable logbook trail.'),
+      React.createElement('div',{style:{display:'grid',gridTemplateColumns:'repeat(6,1fr)',gap:8,alignItems:'start'}},
+        ...[
+          {n:'01',t:'School registers',d:'A school creates an IT admin account and waits for super-admin approval.'},
+          {n:'02',t:'Code issued',d:'Approved schools receive a unique registration code for students and supervisors.'},
+          {n:'03',t:'Users join',d:'Students and school supervisors register into the right school workspace.'},
+          {n:'04',t:'Placement set',d:'Students add company details, organogram, and active industry supervisors.'},
+          {n:'05',t:'Logs approved',d:'Industry supervisor approves by tokenized email link; school supervisor signs off.'},
+          {n:'06',t:'PDF exported',d:'Approved weekly entries become a downloadable digital logbook record.'},
+        ].map(({n,t,d},i) => React.createElement('div',{key:n,style:{background:'rgba(79,142,247,0.1)',border:'1px solid rgba(79,142,247,0.2)',borderRadius:8,padding:'14px 10px',textAlign:'center',position:'relative'}},
+          React.createElement('div',{style:{fontSize:11,fontWeight:900,color:B,marginBottom:6}},n),
+          React.createElement('div',{style:{fontSize:11,fontWeight:700,color:W,marginBottom:6,lineHeight:1.3}},t),
+          React.createElement('div',{style:{fontSize:10,color:G,lineHeight:1.5}},d),
+          i<5 && React.createElement('div',{style:{position:'absolute',right:-6,top:'50%',transform:'translateY(-50%)',color:B,fontWeight:700,fontSize:14,zIndex:2}},'›')
+        ))
+      ),
+      React.createElement('div',{style:{marginTop:28,padding:'14px 20px',background:'rgba(16,185,129,0.1)',border:'1px solid rgba(16,185,129,0.2)',borderRadius:8}},
+        React.createElement('div',{style:{fontSize:12,color:GR,lineHeight:1.6}},'Key insight: industry supervisors do not need another dashboard. SIWESlog keeps their action lightweight through a secure approval link, while schools still get a timestamped digital trail.')
+      )
+    )
+  },
+  {
+    bg:'#F8FAFF',
+    render: () => React.createElement('div',{style:{minHeight:'100%',display:'flex',flexDirection:'column',justifyContent:'center',padding:'40px 56px'}},
+      React.createElement('div',{style:{fontSize:11,color:B,fontWeight:700,letterSpacing:'0.15em',textTransform:'uppercase',marginBottom:10}},'Market Opportunity'),
+      React.createElement('div',{style:{fontSize:26,fontWeight:800,color:N,lineHeight:1.2,marginBottom:28}},'Educational institutions are the customer. SIWES management is the wedge.'),
+      React.createElement('div',{style:{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:14,marginBottom:20}},
+        ...[
+          {label:'Customer',bg:'#E0E7FF',tc:'#3730A3',title:'Schools',value:'B2B SaaS',desc:'Universities, polytechnics, and colleges need structured tools for SIWES administration, records, and supervision'},
+          {label:'Workflow',bg:'#DBEAFE',tc:'#1E40AF',title:'SIWES',value:'Entry Point',desc:'The logbook is the daily pain point, but the buyer needs control across registration, placement, approvals, and exports'},
+          {label:'Expansion',bg:'#D1FAE5',tc:'#065F46',title:'Platform',value:'Data Layer',desc:'Once adopted, the same institution workspace can support analytics, session management, employer data, and reporting'},
+        ].map(({label,bg,tc,title,value,desc}) => React.createElement('div',{key:label,style:{background:bg,borderRadius:12,padding:'20px 18px'}},
+          React.createElement('div',{style:{fontSize:10,fontWeight:800,color:tc,letterSpacing:'0.1em',textTransform:'uppercase',marginBottom:8}},`${label} — ${title}`),
+          React.createElement('div',{style:{fontSize:28,fontWeight:900,color:tc,lineHeight:1,marginBottom:8}},value),
+          React.createElement('div',{style:{fontSize:11,color:tc,opacity:0.75,lineHeight:1.55}},desc)
+        ))
+      ),
+      React.createElement('div',{style:{background:W,border:'1px solid #E2E8F0',borderRadius:10,padding:'16px 20px',display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:12}},
+        ...[
+          {v:'Buyer',l:'Educational institutions'},
+          {v:'User base',l:'Students, supervisors, and admins'},
+          {v:'Billing unit',l:'Active students per academic session'},
+          {v:'Expansion',l:'Analytics and admin controls'},
+        ].map(({v,l}) => React.createElement('div',{key:v,style:{textAlign:'center'}},
+          React.createElement('div',{style:{fontSize:22,fontWeight:800,color:N}},v),
+          React.createElement('div',{style:{fontSize:11,color:'#64748B',marginTop:4,lineHeight:1.4}},l)
+        ))
+      )
+    )
+  },
+  {
+    bg:N,
+    render: () => React.createElement('div',{style:{minHeight:'100%',display:'flex',flexDirection:'column',justifyContent:'center',padding:'40px 56px'}},
+      React.createElement('div',{style:{fontSize:11,color:B,fontWeight:700,letterSpacing:'0.15em',textTransform:'uppercase',marginBottom:10}},'Business Model'),
+      React.createElement('div',{style:{fontSize:28,fontWeight:800,color:W,lineHeight:1.2,marginBottom:28}},'Institutions are billed once per academic session, based on active student count.'),
+      React.createElement('div',{style:{display:'grid',gridTemplateColumns:'1fr 1fr',gap:24}},
+        React.createElement('div',null,
+          React.createElement('div',{style:{fontSize:11,fontWeight:700,color:B,marginBottom:14}},'Billing logic'),
+          ...[
+            'School is onboarded and approved on SIWESlog',
+            'Students register under the institution using its school code',
+            'Active student count becomes the natural billing basis',
+            'Invoice is raised once per academic/SIWES session',
+            'Subscription plan and status are already modeled for schools',
+          ].map((s,i) => React.createElement('div',{key:i,style:{display:'flex',gap:10,marginBottom:10,alignItems:'flex-start'}},
+            React.createElement('div',{style:{width:20,height:20,background:B,borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',fontSize:10,fontWeight:700,color:W,flexShrink:0}},i+1),
+            React.createElement('div',{style:{fontSize:12,color:'#CBD5E1',lineHeight:1.55,paddingTop:2}},s)
+          ))
+        ),
+        React.createElement('div',null,
+          React.createElement('div',{style:{fontSize:11,fontWeight:700,color:B,marginBottom:14}},'Commercial roadmap'),
+          ...[
+            {label:'Now',sub:'School approval + plan labels',rev:'Built',w:'22%',op:'rgba(79,142,247,0.2)'},
+            {label:'Next',sub:'Session lifecycle + cohort locking',rev:'Roadmap',w:'45%',op:'rgba(79,142,247,0.4)'},
+            {label:'Then',sub:'Invoice + payment status workflow',rev:'Roadmap',w:'70%',op:'rgba(79,142,247,0.7)'},
+            {label:'Later',sub:'Analytics and enterprise controls',rev:'Upsell',w:'100%',op:B},
+          ].map(({label,sub,rev,w,op}) => React.createElement('div',{key:label,style:{marginBottom:12}},
+            React.createElement('div',{style:{display:'flex',justifyContent:'space-between',marginBottom:5}},
+              React.createElement('span',{style:{fontSize:11,color:G}},`${label} · ${sub}`),
+              React.createElement('span',{style:{fontSize:11,fontWeight:700,color:W}},rev)
+            ),
+            React.createElement('div',{style:{height:6,background:'rgba(255,255,255,0.08)',borderRadius:3}},
+              React.createElement('div',{style:{height:'100%',width:w,background:op,borderRadius:3}})
+            )
+          )),
+          React.createElement('div',{style:{marginTop:16,padding:'12px 14px',background:'rgba(16,185,129,0.1)',border:'1px solid rgba(16,185,129,0.25)',borderRadius:8}},
+            React.createElement('div',{style:{fontSize:11,color:GR,fontWeight:700}},'Why this fits the buyer'),
+            React.createElement('div',{style:{fontSize:11,color:G,marginTop:4,lineHeight:1.5}},'Schools already manage SIWES in academic cycles. Session-based billing maps to how cohorts are created and approved.')
+          )
+        )
+      )
+    )
+  },
+  {
+    bg:'#F8FAFF',
+    render: () => React.createElement('div',{style:{minHeight:'100%',display:'flex',flexDirection:'column',justifyContent:'center',padding:'40px 56px'}},
+      React.createElement('div',{style:{fontSize:11,color:B,fontWeight:700,letterSpacing:'0.15em',textTransform:'uppercase',marginBottom:10}},'Product Progress'),
+      React.createElement('div',{style:{fontSize:26,fontWeight:800,color:N,lineHeight:1.2,marginBottom:8}},'The product is beyond concept: the core SaaS workflow is implemented.'),
+      React.createElement('div',{style:{fontSize:14,color:'#475569',marginBottom:24}},'The repository contains a working full-stack product with role-specific dashboards, protected APIs, and operational workflows.'),
+      React.createElement('div',{style:{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:12}},
+        ...[
+          {icon:'✅',t:'Full-stack app built',d:'React/Vite frontend, Node/Express API, MongoDB/Mongoose models, Cloudinary uploads, and PDFKit export'},
+          {icon:'✅',t:'Role-based access',d:'Student, school supervisor, IT admin, and super admin dashboards are protected by route and API role checks'},
+          {icon:'✅',t:'Multi-tenant data model',d:'Users, students, placements, logs, notifications, and visits are scoped by school ID'},
+          {icon:'✅',t:'School onboarding',d:'Schools register for approval; approved schools receive registration codes for students and supervisors'},
+          {icon:'✅',t:'Email workflows',d:'Welcome, OTP, school approval, supervisor approval, and log approval emails are implemented via Resend'},
+          {icon:'✅',t:'Approval chain',d:'Students submit logs, industry supervisors approve by token link, and school supervisors sign off with comments'},
+          {icon:'✅',t:'Security baseline',d:'Helmet, CORS allowlist, rate limiting, HPP, input sanitization, hashed passwords, and JWT refresh flow'},
+          {icon:'✅',t:'Responsive dashboards',d:'Student, school supervisor, IT admin, and super admin views include mobile card layouts and desktop tables'},
+          {icon:'🔄',t:'Lifecycle upgrades',d:'Registration windows, cohort activation, archiving, billing status, and auto-assignment belong on the roadmap'},
+        ].map(({icon,t,d}) => React.createElement('div',{key:t,style:{background:W,border:'1px solid #E2E8F0',borderRadius:10,padding:'13px 14px'}},
+          React.createElement('div',{style:{fontSize:16,marginBottom:6}},icon),
+          React.createElement('div',{style:{fontSize:12,fontWeight:700,color:N,marginBottom:4}},t),
+          React.createElement('div',{style:{fontSize:11,color:'#64748B',lineHeight:1.5}},d)
+        ))
+      )
+    )
+  },
+  {
+    bg:N,
+    scroll: true,
+    render: () => React.createElement('div',{style:{minHeight:'100%',display:'flex',flexDirection:'column',justifyContent:'flex-start',padding:'28px 56px 56px'}},
+      React.createElement('div',{style:{fontSize:11,color:B,fontWeight:700,letterSpacing:'0.15em',textTransform:'uppercase',marginBottom:10}},'Product Showcase'),
+      React.createElement('div',{style:{fontSize:26,fontWeight:800,color:W,lineHeight:1.2,marginBottom:24}},'A working SaaS product, not just a concept.'),
+      React.createElement('div',{style:{display:'grid',gridTemplateColumns:'repeat(2,1fr)',gap:20,alignItems:'start'}},
+        ...[
+          {title:'Student Dashboard',file:'./screenshots/student-dashboard.png'},
+          {title:'IT Admin Dashboard',file:'./screenshots/it-admin-dashboard.png'},
+          {title:'School Supervisor Dashboard',file:'./screenshots/school-supervisor-dashboard.png'},
+          {title:'Weekly Logbook',file:'./screenshots/weekly-logbook.png'},
+          {title:'Weekly Log Entry Form',file:'./screenshots/weekly-log-entry-form.png'},
+          {title:'Placement Management',file:'./screenshots/placement-management.png'},
+          {title:'Industry Supervisor Approval Page',file:'./screenshots/industry-supervisor-approval-page.png'},
+        ].map(({title,file}) => React.createElement('div',{key:title,style:{background:'rgba(255,255,255,0.04)',border:'1px solid rgba(255,255,255,0.08)',borderRadius:10,overflow:'hidden'}},
+          React.createElement('a',{href:file,target:'_blank',rel:'noreferrer',style:{minHeight:300,background:'rgba(79,142,247,0.08)',position:'relative',display:'flex',alignItems:'center',justifyContent:'center',textDecoration:'none',cursor:'pointer'}},
+            React.createElement('img',{src:file,alt:title,onLoad:(e)=>{if(e.currentTarget.nextSibling)e.currentTarget.nextSibling.style.display='none'},onError:(e)=>{e.currentTarget.style.display='none'},style:{width:'100%',height:'auto',objectFit:'contain',display:'block'}}),
+            React.createElement('div',{style:{position:'absolute',inset:0,display:'flex',alignItems:'center',justifyContent:'center',fontSize:11,color:'rgba(203,213,225,0.9)',fontWeight:700,textAlign:'center',padding:'0 10px'}},title)
+          ),
+          React.createElement('div',{style:{padding:'12px 14px'}},
+            React.createElement('div',{style:{fontSize:13,fontWeight:800,color:W}},title)
+          )
+        ))
+      )
+    )
+  },
+  {
+    bg:N,
+    render: () => React.createElement('div',{style:{minHeight:'100%',display:'flex',flexDirection:'column',justifyContent:'center',padding:'40px 56px'}},
+      React.createElement('div',{style:{fontSize:11,color:B,fontWeight:700,letterSpacing:'0.15em',textTransform:'uppercase',marginBottom:10}},'Go-to-Market'),
+      React.createElement('div',{style:{fontSize:28,fontWeight:800,color:W,lineHeight:1.2,marginBottom:32}},'Pilot with institutions, prove usage, convert by academic session.'),
+      React.createElement('div',{style:{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:14}},
+        ...[
+          {phase:'Phase 1',period:'Pilot',color:B,title:'Run controlled institutional pilots',tactics:['Demo to SIWES coordinators and IT units','Onboard one active cohort per institution','Measure log submission, approval, and admin workload','Use feedback to strengthen session lifecycle']},
+          {phase:'Phase 2',period:'Convert',color:'#818CF8',title:'Move from pilot to paid session',tactics:['Price by active student count for the session','Package onboarding, training, and support','Turn usage evidence into case studies','Prioritize features requested by paying schools']},
+          {phase:'Phase 3',period:'Expand',color:'#A78BFA',title:'Grow into the SIWES admin layer',tactics:['Add institution-level analytics','Improve audit and reporting exports','Build employer placement intelligence','Expand only after repeatable adoption is proven']},
+        ].map(({phase,period,color,title,tactics}) => React.createElement('div',{key:phase,style:{background:'rgba(255,255,255,0.04)',border:'1px solid rgba(255,255,255,0.08)',borderRadius:10,padding:'16px',borderTop:`3px solid ${color}`}},
+          React.createElement('div',{style:{fontSize:10,fontWeight:800,color,letterSpacing:'0.1em',textTransform:'uppercase',marginBottom:6}},`${phase} · ${period}`),
+          React.createElement('div',{style:{fontSize:13,fontWeight:700,color:W,marginBottom:14,lineHeight:1.3}},title),
+          ...tactics.map((t,i) => React.createElement('div',{key:i,style:{display:'flex',gap:8,marginBottom:7}},
+            React.createElement('div',{style:{width:4,height:4,background:color,borderRadius:'50%',marginTop:6,flexShrink:0}}),
+            React.createElement('div',{style:{fontSize:11,color:G,lineHeight:1.5}},t)
+          ))
+        ))
+      )
+    )
+  },
+  {
+    bg:'#F8FAFF',
+    render: () => React.createElement('div',{style:{minHeight:'100%',display:'flex',flexDirection:'column',justifyContent:'center',padding:'40px 56px'}},
+      React.createElement('div',{style:{fontSize:11,color:B,fontWeight:700,letterSpacing:'0.15em',textTransform:'uppercase',marginBottom:10}},'Competitive Advantage'),
+      React.createElement('div',{style:{fontSize:24,fontWeight:800,color:N,lineHeight:1.2,marginBottom:8}},'The advantage is workflow depth, not generic school management.'),
+      React.createElement('div',{style:{fontSize:14,color:'#475569',marginBottom:24}},'SIWESlog is designed around how industrial training records actually move between students, companies, supervisors, and school IT units.'),
+      React.createElement('div',{style:{display:'grid',gridTemplateColumns:'1fr 1fr',gap:14}},
+        ...[
+          {t:'No-login industry supervisor approval',d:'Industry supervisors approve through tokenized email links, removing account setup friction while preserving a timestamped audit trail.'},
+          {t:'Purpose-built SIWES data model',d:'The platform models students, schools, placements, weekly logs, supervisors, visits, approvals, attachments, notifications, and export workflows.'},
+          {t:'Multi-tenant from day one',d:'Every major resource carries school-level scoping, so a single deployment can support multiple institutions with isolated records.'},
+          {t:'Founder-market insight',d:'The deck can credibly position the founder as close to the problem because the product reflects detailed SIWES workflow knowledge throughout the codebase.'},
+        ].map(({t,d}) => React.createElement('div',{key:t,style:{background:W,borderLeft:`4px solid ${B}`,borderRadius:'0 10px 10px 0',border:'1px solid #E2E8F0',borderLeftColor:B,padding:'16px 18px'}},
+          React.createElement('div',{style:{fontSize:13,fontWeight:700,color:N,marginBottom:6}},t),
+          React.createElement('div',{style:{fontSize:12,color:'#475569',lineHeight:1.6}},d)
+        ))
+      )
+    )
+  },
+  {
+    bg:N,
+    render: () => React.createElement('div',{style:{minHeight:'100%',display:'flex',flexDirection:'column',justifyContent:'center',padding:'40px 56px'}},
+      React.createElement('div',{style:{fontSize:11,color:B,fontWeight:700,letterSpacing:'0.15em',textTransform:'uppercase',marginBottom:10}},'Why Now'),
+      React.createElement('div',{style:{fontSize:28,fontWeight:800,color:W,lineHeight:1.2,marginBottom:32}},'The timing is right for a focused operational tool.'),
+      React.createElement('div',{style:{display:'grid',gridTemplateColumns:'1fr 1fr',gap:14}},
+        ...[
+          {icon:'🏛️',t:'Administrative digitization',d:'Universities already run student portals and digital workflows; SIWESlog extends that expectation into industrial training operations.'},
+          {icon:'📱',t:'Mobile-first student behavior',d:'The frontend is designed for students on phones and admins on desktops, matching how different users naturally interact with the workflow.'},
+          {icon:'🔄',t:'Paper creates operational risk',d:'Every manual handoff creates delay, ambiguity, and missing status. Digital approvals make the process visible as it happens.'},
+          {icon:'⚡',t:'Narrow wedge, larger platform',d:'The first wedge is the logbook, but the architecture points toward placement management, analytics, billing, and regulator-grade reporting.'},
+        ].map(({icon,t,d}) => React.createElement('div',{key:t,style:{background:'rgba(255,255,255,0.04)',border:'1px solid rgba(255,255,255,0.08)',borderRadius:10,padding:'16px'}},
+          React.createElement('div',{style:{fontSize:22,marginBottom:8}},icon),
+          React.createElement('div',{style:{fontSize:13,fontWeight:700,color:W,marginBottom:6}},t),
+          React.createElement('div',{style:{fontSize:12,color:G,lineHeight:1.6}},d)
+        ))
+      )
+    )
+  },
+  {
+    bg:'#F8FAFF',
+    render: () => React.createElement('div',{style:{minHeight:'100%',display:'flex',flexDirection:'column',justifyContent:'center',padding:'40px 56px'}},
+      React.createElement('div',{style:{fontSize:11,color:B,fontWeight:700,letterSpacing:'0.15em',textTransform:'uppercase',marginBottom:10}},'Roadmap'),
+      React.createElement('div',{style:{fontSize:28,fontWeight:800,color:N,lineHeight:1.2,marginBottom:32}},'From shipped workflow to institution-grade operating system.'),
+      React.createElement('div',{style:{position:'relative'}},
+        React.createElement('div',{style:{position:'absolute',left:15,top:8,bottom:8,width:2,background:'#E2E8F0'}}),
+        ...[
+          {period:'Current',color:B,items:['School approval workflow','Role-based dashboards','Placement records','Weekly logs and approvals','PDF export']},
+          {period:'Next build',color:'#818CF8',items:['Registration windows','Cohort activation','Session archiving','Billing/payment status','Stronger PDF completeness']},
+          {period:'Operational depth',color:'#A78BFA',items:['Zone-based supervisor assignment','Bulk student imports','Admin analytics','Audit exports','Support tooling']},
+          {period:'Long-term vision',color:'#C4B5FD',items:['Institution performance data','Employer placement intelligence','Regulator-ready reporting','Expansion beyond SIWES-style programmes']},
+        ].map(({period,color,items}) => React.createElement('div',{key:period,style:{display:'flex',gap:20,marginBottom:18}},
+          React.createElement('div',{style:{width:30,flexShrink:0,display:'flex',alignItems:'flex-start',paddingTop:3,justifyContent:'center'}},
+            React.createElement('div',{style:{width:14,height:14,background:color,borderRadius:'50%',border:'3px solid #F8FAFF',zIndex:1,position:'relative'}})
+          ),
+          React.createElement('div',{style:{flex:1,paddingBottom:4}},
+            React.createElement('div',{style:{fontSize:11,fontWeight:800,color,marginBottom:7}},period),
+            React.createElement('div',{style:{display:'flex',flexWrap:'wrap',gap:6}},
+              ...items.map(item => React.createElement('span',{key:item,style:{fontSize:11,background:W,border:'1px solid #E2E8F0',borderRadius:4,padding:'3px 9px',color:'#334155'}},item))
+            )
+          )
+        ))
+      )
+    )
+  },
+  {
+    bg:N,
+    render: ({isMobile}={}) => React.createElement('div',{style:{minHeight:'100%',boxSizing:'border-box',display:'flex',flexDirection:'column',justifyContent:isMobile?'flex-start':'center',padding:isMobile?'24px 18px':'28px 56px'}},
+      React.createElement('div',{style:{fontSize:11,color:B,fontWeight:700,letterSpacing:'0.15em',textTransform:'uppercase',marginBottom:isMobile?14:16,textAlign:'center'}},'The Founder'),
+      React.createElement('div',{style:{display:'grid',gridTemplateColumns:isMobile?'1fr':'182px 1fr',gap:isMobile?16:26,alignItems:'center',marginBottom:isMobile?14:16}},
+        React.createElement('div',{style:{display:'flex',flexDirection:'column',alignItems:'center',textAlign:'center'}},
+          React.createElement('div',{style:{width:isMobile?118:138,height:isMobile?118:138,background:'rgba(79,142,247,0.15)',border:'3px solid rgba(79,142,247,0.45)',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',fontSize:30,fontWeight:800,color:B,marginBottom:12,overflow:'hidden',boxShadow:'0 14px 38px rgba(0,0,0,0.28)'}},
+            React.createElement('img',{src:FOUNDER_PHOTO,alt:'Samuel Adeoye',onError:(e)=>{e.currentTarget.remove();e.currentTarget.parentElement.textContent='SA'},style:{width:'100%',height:'100%',objectFit:'cover',objectPosition:'50% 28%',display:'block'}})
+          ),
+          React.createElement('div',{style:{fontSize:isMobile?21:23,fontWeight:800,color:W,marginBottom:3}},'Samuel Adeoye'),
+          React.createElement('div',{style:{fontSize:12,color:B,lineHeight:1.35}},"400L Computer Engineering Student · Redeemer's University")
+        ),
+        React.createElement('div',{style:{background:'rgba(255,255,255,0.04)',border:'1px solid rgba(255,255,255,0.08)',borderRadius:12,padding:isMobile?'16px 18px':'18px 24px'}},
+          React.createElement('div',{style:{fontSize:15,fontWeight:800,color:W,marginBottom:8}},'Why I am building this'),
+          React.createElement('div',{style:{fontSize:isMobile?13:14,color:'#CBD5E1',lineHeight:1.62,fontStyle:'italic'}},'"I built SIWESlog while on SIWES at SQI College of ICT, Osogbo, as a cybersecurity student intern. One week, while filling my paper logbook, a colleague complained about the stress of the process. That moment matched what I was already experiencing, and I decided to build a less stressful, more accountable way to manage SIWES logbooks."')
+        )
+      ),
+      React.createElement('div',{style:{display:'grid',gridTemplateColumns:isMobile?'1fr':'1fr 1fr 1fr',gap:isMobile?10:12,width:'100%'}},
+        ...[
+          {icon:'🎯',t:'Lived the problem',d:'Built during my own SIWES, while using the same paper logbook process.'},
+          {icon:'💻',t:'Solo builder',d:'Built the first version myself, supported by faith, mentors, family, colleagues, and modern AI-assisted development tools.'},
+          {icon:'🏗️',t:'Shipping history',d:'Past work includes SmartAgriClimate, QuickConnect, CipherVault, YMC, and more',link:'https://samueladeoye.vercel.app',linkText:'samueladeoye.vercel.app'},
+        ].map(({icon,t,d,link,linkText}) => React.createElement('div',{key:t,style:{background:'rgba(255,255,255,0.04)',border:'1px solid rgba(255,255,255,0.08)',borderRadius:8,padding:'12px 12px'}},
+          React.createElement('div',{style:{fontSize:17,marginBottom:5}},icon),
+          React.createElement('div',{style:{fontSize:12,fontWeight:700,color:W,marginBottom:4}},t),
+          React.createElement('div',{style:{fontSize:10.5,color:G,lineHeight:1.45}},d),
+          link && React.createElement('a',{href:link,target:'_blank',rel:'noreferrer',style:{display:'inline-block',marginTop:5,fontSize:10.5,color:B,textDecoration:'none',fontWeight:700}},linkText)
+        ))
+      )
+    )
+  },
+  {
+    bg:'#F8FAFF',
+    render: () => React.createElement('div',{style:{minHeight:'100%',display:'flex',flexDirection:'column',justifyContent:'center',padding:'40px 56px'}},
+      React.createElement('div',{style:{fontSize:11,color:B,fontWeight:700,letterSpacing:'0.15em',textTransform:'uppercase',marginBottom:10}},'The Ask'),
+      React.createElement('div',{style:{fontSize:26,fontWeight:800,color:N,lineHeight:1.2,marginBottom:8}},'The core product exists. The next milestone is institutional validation.'),
+      React.createElement('div',{style:{fontSize:14,color:'#475569',marginBottom:24}},'SIWESlog is ready for pilots that test adoption, support load, pricing, and the next set of administrative workflows.'),
+      React.createElement('div',{style:{display:'grid',gridTemplateColumns:'1fr 1fr',gap:20}},
+        React.createElement('div',{style:{background:W,border:'1px solid #E2E8F0',borderRadius:12,padding:'20px'}},
+          React.createElement('div',{style:{fontSize:12,fontWeight:700,color:B,marginBottom:14}},'What we are seeking'),
+          ...[
+            {icon:'🏦',t:'Institutional introductions',d:'Access to university decision-makers who can approve pilot cohorts and provide product feedback'},
+            {icon:'🧭',t:'Go-to-market support',d:'Guidance on procurement cycles, budget timing, onboarding, pricing, and stakeholder navigation'},
+            {icon:'💡',t:'Pilot funding',d:'Funding to harden session management, support onboarding, and collect credible usage evidence'},
+         ].map(({icon,t,d}) => React.createElement('div',{key:t,style:{display:'flex',gap:10,marginBottom:12,alignItems:'flex-start'}},
+            React.createElement('div',{style:{fontSize:18,flexShrink:0}},icon),
+            React.createElement('div',null,
+              React.createElement('div',{style:{fontSize:12,fontWeight:700,color:N,marginBottom:3}},t),
+              React.createElement('div',{style:{fontSize:11,color:'#64748B',lineHeight:1.55}},d)
+            )
+          ))
+        ),
+        React.createElement('div',null,
+          React.createElement('div',{style:{background:N,borderRadius:12,padding:'20px',marginBottom:12}},
+            React.createElement('div',{style:{fontSize:12,fontWeight:700,color:B,marginBottom:12}},'Why SIWESlog wins'),
+            ...[
+              'Purpose-built workflow instead of a generic school portal',
+              'Working product foundation, not only a concept deck',
+              'Natural recurring revenue path through academic sessions',
+              'Multi-tenant architecture designed for institution-level adoption',
+            ].map((s,i) => React.createElement('div',{key:i,style:{display:'flex',gap:8,marginBottom:8}},
+              React.createElement('div',{style:{color:GR,fontSize:14,flexShrink:0}},'✓'),
+              React.createElement('div',{style:{fontSize:12,color:'#CBD5E1',lineHeight:1.5}},s)
+            ))
+          ),
+          React.createElement('div',{style:{background:B,borderRadius:12,padding:'20px',textAlign:'center'}},
+            React.createElement('div',{style:{fontSize:22,fontWeight:900,color:W,marginBottom:4}},'SIWES',React.createElement('span',{style:{fontWeight:400}},'log')),
+            React.createElement('div',{style:{fontSize:13,fontWeight:600,color:'rgba(255,255,255,0.85)',marginBottom:8}},'siweslog.com'),
+            React.createElement('div',{style:{fontSize:11,color:'rgba(255,255,255,0.65)'}},'Product URL for demos and pilots')
+          )
+        )
+      )
+    )
+  },
+  {
+    bg:N,
+    render: () => React.createElement('div',{style:{minHeight:'100%',display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',textAlign:'center',padding:'40px 56px'}},
+      React.createElement('div',{style:{fontSize:11,color:B,fontWeight:700,letterSpacing:'0.15em',textTransform:'uppercase',marginBottom:18}},'Thank You'),
+      React.createElement('div',{style:{fontSize:46,fontWeight:900,color:W,lineHeight:1.05,marginBottom:12}},'Questions?'),
+      React.createElement('div',{style:{fontSize:15,color:G,maxWidth:560,lineHeight:1.7,marginBottom:28}},'SIWESlog is ready for serious institutional conversations, product demos, and pilot discussions.'),
+      React.createElement('div',{style:{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:12,width:'100%',maxWidth:780}},
+        ...[
+          {label:'WhatsApp',value:'07039094213',href:'https://wa.me/2347039094213'},
+          {label:'Email',value:'adeoyesamuelolamidemails@gmail.com',href:'mailto:adeoyesamuelolamidemails@gmail.com'},
+          {label:'Portfolio',value:'samueladeoye.vercel.app',href:'https://samueladeoye.vercel.app'},
+          {label:'LinkedIn',value:'Samuel Adeoye',href:'https://www.linkedin.com/in/samuel-adeoye-1861343b5/'},
+          {label:'Product',value:'siweslog.com',href:'https://siweslog.com'},
+          {label:'Founder',value:'Samuel Adeoye',href:'https://samueladeoye.vercel.app'},
+        ].map(({label,value,href}) => React.createElement('a',{key:label,href,target:'_blank',rel:'noreferrer',style:{background:'rgba(255,255,255,0.04)',border:'1px solid rgba(255,255,255,0.08)',borderRadius:10,padding:'16px 14px',textDecoration:'none',textAlign:'left'}},
+          React.createElement('div',{style:{fontSize:10,fontWeight:800,color:B,letterSpacing:'0.1em',textTransform:'uppercase',marginBottom:6}},label),
+          React.createElement('div',{style:{fontSize:12,fontWeight:700,color:W,lineHeight:1.4,wordBreak:'break-word'}},value)
+        ))
+      ),
+      React.createElement('div',{style:{fontSize:28,fontWeight:900,color:W,marginTop:28}},'SIWES',React.createElement('span',{style:{color:B}},'log'))
+    )
+  }
+];
+
+function adaptForMobile(node, isMobile) {
+  if (!isMobile || !React.isValidElement(node)) return node;
+
+  const style = node.props.style ? { ...node.props.style } : undefined;
+  if (style) {
+    if (style.padding) style.padding = '24px 18px';
+    if (style.display === 'grid') {
+      style.gridTemplateColumns = '1fr';
+      style.gap = Math.min(parseInt(style.gap, 10) || 12, 14);
+    }
+    if (typeof style.fontSize === 'number') {
+      if (style.fontSize >= 60) style.fontSize = 42;
+      else if (style.fontSize >= 30) style.fontSize = 24;
+      else if (style.fontSize >= 26) style.fontSize = 22;
+      else if (style.fontSize >= 22) style.fontSize = 18;
+      else if (style.fontSize < 11) style.fontSize = 11;
+    }
+    if (style.maxWidth && typeof style.maxWidth === 'number') style.maxWidth = '100%';
+    if (style.width === '100%' || style.maxWidth === '100%') style.boxSizing = 'border-box';
+  }
+
+  const children = React.Children.map(node.props.children, child => adaptForMobile(child, isMobile));
+  return React.cloneElement(node, style ? { style } : undefined, children);
+}
+
+function PitchDeck() {
+  const [cur, setCur] = useState(0);
+  const [vw, setVw] = useState(typeof window === 'undefined' ? 1200 : window.innerWidth);
+  const next = useCallback(() => setCur(c => Math.min(c+1,slides.length-1)),[]);
+  const prev = useCallback(() => setCur(c => Math.max(c-1,0)),[]);
+  useEffect(() => {
+    const h = e => { if(e.key==='ArrowRight'||e.key===' ') next(); if(e.key==='ArrowLeft') prev(); };
+    window.addEventListener('keydown',h);
+    return () => window.removeEventListener('keydown',h);
+  },[next,prev]);
+  useEffect(() => {
+    const onResize = () => setVw(window.innerWidth);
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  },[]);
+  const S = slides[cur];
+  const isMobile = vw < 760;
+  return React.createElement('div',{style:{fontFamily:"'Inter',system-ui,sans-serif",userSelect:'none',height:'100vh',display:'flex',flexDirection:'column',overflowY:S.scroll?'auto':'hidden',overflowX:'hidden'}},
+    React.createElement('div',{style:{height:4,background:'#1E293B',flex:'0 0 auto'}},
+      React.createElement('div',{style:{height:'100%',background:B,width:`${((cur+1)/slides.length)*100}%`,transition:'width 0.4s ease'}})
+    ),
+    React.createElement('div',{style:{background:S.bg,transition:'background 0.25s',flex:S.scroll?'0 0 auto':'1 1 auto',minHeight:S.scroll?'auto':0,overflowY:isMobile?'auto':'hidden',overflowX:'hidden'}}, adaptForMobile(S.render({isMobile}), isMobile)),
+    React.createElement('div',{style:{background:'#0D1526',padding:isMobile?'8px 10px':'10px 20px',display:'flex',alignItems:'center',justifyContent:'space-between',gap:isMobile?8:10,flex:'0 0 auto'}},
+      React.createElement('button',{onClick:prev,disabled:cur===0,style:{padding:isMobile?'7px 10px':'7px 16px',background:cur===0?'rgba(255,255,255,0.04)':'rgba(79,142,247,0.15)',border:'1px solid rgba(79,142,247,0.3)',borderRadius:6,color:cur===0?'#334155':B,cursor:cur===0?'default':'pointer',fontSize:isMobile?12:13,fontFamily:'inherit',fontWeight:600,whiteSpace:'nowrap'}},'← Prev'),
+      React.createElement('div',{style:{display:'flex',gap:isMobile?4:5,alignItems:'center',overflow:'hidden',maxWidth:isMobile?'42vw':'none'}},
+        ...slides.map((_,i) => React.createElement('button',{key:i,onClick:()=>setCur(i),style:{width:i===cur?18:6,height:6,background:i===cur?B:'#1E293B',borderRadius:3,border:'none',cursor:'pointer',transition:'all 0.25s',padding:0}}))
+      ),
+      React.createElement('div',{style:{display:'flex',alignItems:'center',gap:isMobile?6:10}},
+        !isMobile && React.createElement('span',{style:{fontSize:12,color:'#334155'}},`${cur+1} / ${slides.length}`),
+        React.createElement('button',{onClick:next,disabled:cur===slides.length-1,style:{padding:isMobile?'7px 10px':'7px 16px',background:cur===slides.length-1?'rgba(255,255,255,0.04)':B,border:'none',borderRadius:6,color:W,cursor:cur===slides.length-1?'default':'pointer',fontSize:isMobile?12:13,fontFamily:'inherit',fontWeight:600,whiteSpace:'nowrap'}},'Next →')
+      )
+    ),
+    cur===0&&!isMobile&&React.createElement('div',{style:{textAlign:'center',padding:'6px',background:'#060B14',fontSize:11,color:'#334155',flex:'0 0 auto'}},`Use ← → arrow keys or buttons to navigate · ${slides.length} slides`)
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(PitchDeck));
+</script>
