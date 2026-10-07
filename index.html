@@ -23,7 +23,7 @@ const slides=[
 // 2. THE PROBLEM
 {bg:'#080F1A',render:()=>React.createElement('div',{style:{minHeight:'100%',display:'flex',flexDirection:'column',justifyContent:'center',padding:'40px 56px'}},
   React.createElement('div',{style:{fontSize:11,color:B,fontWeight:700,letterSpacing:'0.15em',textTransform:'uppercase',marginBottom:10}},'The Problem'),
-  React.createElement('div',{style:{fontSize:30,fontWeight:800,color:W,lineHeight:1.2,marginBottom:32}},'SIWES is a structured national programme. The administration workflow is not.'),
+  React.createElement('div',{style:{fontSize:30,fontWeight:800,color:W,lineHeight:1.2,marginBottom:32}},'SIWES is structured. At many schools, logbook administration still relies on paper and manual coordination.'),
   React.createElement('div',{style:{display:'grid',gridTemplateColumns:'1fr 1fr',gap:14}},
     ...[
       {icon:'📋',t:'Paper records are fragile',d:'Physical logbooks can be lost, damaged, or submitted incomplete. Once a record is gone, there is no system backup and no path to recovery.'},
@@ -41,13 +41,14 @@ const slides=[
 // 3. THE SCALE
 {bg:'#0A0A1F',render:()=>React.createElement('div',{style:{minHeight:'100%',display:'flex',flexDirection:'column',justifyContent:'center',padding:'40px 56px'}},
   React.createElement('div',{style:{fontSize:11,color:B,fontWeight:700,letterSpacing:'0.15em',textTransform:'uppercase',marginBottom:10}},'The Scale'),
-  React.createElement('div',{style:{fontSize:28,fontWeight:800,color:W,lineHeight:1.2,marginBottom:28}},'The programme is large. The infrastructure gap is total.'),
+  React.createElement('div',{style:{fontSize:28,fontWeight:800,color:W,lineHeight:1.2,marginBottom:10}},'A focused market entry starts with institutions running SIWES cohorts.'),
+  React.createElement('div',{style:{fontSize:13,color:G,lineHeight:1.6,marginBottom:24}},'Use bottom-up sizing until national student and institution counts are verified: eligible students × proposed per-session price.'),
   React.createElement('div',{style:{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:12,marginBottom:20}},
     ...[
-      {v:'500K+',l:'SIWES students registered annually',src:'ITF Annual Report'},
-      {v:'274',l:'Licensed universities in Nigeria',src:'NUC, 2024'},
-      {v:'155+',l:'Accredited polytechnics',src:'NBTE'},
-      {v:'150+',l:'Colleges of education',src:'NCCE'},
+      {v:'1',l:'Initial pilot school to secure'},
+      {v:'South-West',l:'Beachhead for founder-led outreach'},
+      {v:'₦1,000',l:'Proposed per active student, per session'},
+      {v:'₦2m',l:'Illustration: 2,000 eligible students × ₦1,000'},
     ].map(({v,l,src})=>React.createElement('div',{key:v,style:{background:'rgba(79,142,247,0.08)',border:'1px solid rgba(79,142,247,0.2)',borderRadius:10,padding:'18px 12px',textAlign:'center'}},
       React.createElement('div',{style:{fontSize:26,fontWeight:900,color:B,lineHeight:1}},v),
       React.createElement('div',{style:{fontSize:11,color:G,marginTop:8,lineHeight:1.5}},l),
@@ -55,10 +56,10 @@ const slides=[
     ))
   ),
   React.createElement('div',{style:{background:'rgba(255,255,255,0.04)',borderLeft:'3px solid '+B,padding:'16px 20px',borderRadius:'0 8px 8px 0',marginBottom:14}},
-    React.createElement('div',{style:{fontSize:13,color:'#CBD5E1',lineHeight:1.65}},'The ITF\'s official Student Industrial Work Experience Scheme logbook is a physical publication — no digital submission standard has been mandated or widely adopted across these institutions.'),
-    React.createElement('div',{style:{fontSize:10,color:'rgba(148,163,184,0.6)',marginTop:8,fontStyle:'italic'}},'Reference: ITF SIWES Student Logbook (official ITF publication) — specifies the physical format as the submission artefact.')
+      React.createElement('div',{style:{fontSize:13,color:'#CBD5E1',lineHeight:1.65}},'First validation question: will an institution pay to coordinate this workflow digitally, and what cohort size and service level make the economics work?'),
+    React.createElement('div',{style:{fontSize:10,color:'rgba(148,163,184,0.6)',marginTop:8,fontStyle:'italic'}},'The 2,000-student example is an estimate for discussion, not confirmed school enrolment or contracted revenue.')
   ),
-  React.createElement('div',{style:{fontSize:10,color:'rgba(148,163,184,0.45)',lineHeight:1.6}},'ITF — Industrial Training Fund  ·  NUC — National Universities Commission  ·  NBTE — National Board for Technical Education  ·  NCCE — National Commission for Colleges of Education')
+  React.createElement('div',{style:{fontSize:10,color:'rgba(148,163,184,0.45)',lineHeight:1.6}},'Market sizing will be refined with verified SIWES cohort counts and pilot buyer interviews.')
 )},
 
 // 4. THE SOLUTION
@@ -133,7 +134,7 @@ const slides=[
 // 7. MARKET OPPORTUNITY
 {bg:'#F8FAFF',render:()=>React.createElement('div',{style:{minHeight:'100%',display:'flex',flexDirection:'column',justifyContent:'center',padding:'40px 56px'}},
   React.createElement('div',{style:{fontSize:11,color:B,fontWeight:700,letterSpacing:'0.15em',textTransform:'uppercase',marginBottom:10}},'Market Opportunity'),
-  React.createElement('div',{style:{fontSize:26,fontWeight:800,color:N,lineHeight:1.2,marginBottom:28}},'Nigerian tertiary institutions are the customer. SIWES administration is the product.'),
+  React.createElement('div',{style:{fontSize:26,fontWeight:800,color:N,lineHeight:1.2,marginBottom:18}},'The institution is the buyer. Start with reachable South-West SIWES cohorts.'),
   React.createElement('div',{style:{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:14,marginBottom:20}},
     ...[
       {label:'The Customer',bg:'#E0E7FF',tc:'#3730A3',value:'Tertiary Institutions',desc:'Nigerian universities, polytechnics, and colleges of education mandated by the ITF Act to run SIWES are the paying entities. The IT coordinator is the daily user; the institution is the account.'},
@@ -147,10 +148,10 @@ const slides=[
   ),
   React.createElement('div',{style:{background:W,border:'1px solid #E2E8F0',borderRadius:10,padding:'16px 20px',display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:12}},
     ...[
-      {v:'570+',l:'Institutions mandated to run SIWES',src:'NUC + NBTE + NCCE'},
-      {v:'500K+',l:'SIWES students registered per session',src:'ITF Annual Report'},
-      {v:'One invoice',l:'Per institution, per academic session'},
-      {v:'Per session',l:'Natural renewal cycle — tied to the academic calendar'},
+      {v:'School buyer',l:'Institution controls onboarding and student access'},
+      {v:'₦1,000',l:'Proposed price per active student per session'},
+      {v:'2,000 students',l:'Illustrative school cohort; eligibility to be confirmed'},
+      {v:'₦2 million',l:'Illustrative session revenue at the proposed price'},
     ].map(({v,l,src})=>React.createElement('div',{key:v,style:{textAlign:'center'}},
       React.createElement('div',{style:{fontSize:16,fontWeight:800,color:N}},v),
       React.createElement('div',{style:{fontSize:11,color:'#64748B',marginTop:4,lineHeight:1.4}},l),
@@ -162,7 +163,8 @@ const slides=[
 // 8. BUSINESS MODEL
 {bg:N,render:()=>React.createElement('div',{style:{minHeight:'100%',display:'flex',flexDirection:'column',justifyContent:'center',padding:'40px 56px'}},
   React.createElement('div',{style:{fontSize:11,color:B,fontWeight:700,letterSpacing:'0.15em',textTransform:'uppercase',marginBottom:10}},'Business Model'),
-  React.createElement('div',{style:{fontSize:28,fontWeight:800,color:W,lineHeight:1.2,marginBottom:28}},'Institutions pay once per academic session based on active student count.'),
+  React.createElement('div',{style:{fontSize:28,fontWeight:800,color:W,lineHeight:1.2,marginBottom:10}},'Institutions pay per active student, per SIWES session.'),
+  React.createElement('div',{style:{fontSize:13,color:G,lineHeight:1.6,marginBottom:24}},'Proposed price: ₦1,000 per student per session. This is a working assumption to validate with pilot schools.'),
   React.createElement('div',{style:{display:'grid',gridTemplateColumns:'1fr 1fr',gap:24}},
     React.createElement('div',null,
       React.createElement('div',{style:{fontSize:11,fontWeight:700,color:B,marginBottom:14}},'How billing works'),
@@ -178,25 +180,13 @@ const slides=[
       ))
     ),
     React.createElement('div',null,
-      React.createElement('div',{style:{fontSize:11,fontWeight:700,color:B,marginBottom:14}},'Development and billing roadmap'),
-      ...[
-        {label:'Now',sub:'Role-based access and approval workflows',rev:'Built',w:'22%',op:'rgba(79,142,247,0.2)'},
-        {label:'Next',sub:'Session lifecycle and cohort activation',rev:'In development',w:'48%',op:'rgba(79,142,247,0.45)'},
-        {label:'Then',sub:'Invoice and payment status per school',rev:'Roadmap',w:'72%',op:'rgba(79,142,247,0.7)'},
-        {label:'Later',sub:'Analytics dashboard and admin reporting',rev:'Upsell feature',w:'100%',op:B},
-      ].map(({label,sub,rev,w,op})=>React.createElement('div',{key:label,style:{marginBottom:12}},
-        React.createElement('div',{style:{display:'flex',justifyContent:'space-between',marginBottom:5}},
-          React.createElement('span',{style:{fontSize:11,color:G}},label+' · '+sub),
-          React.createElement('span',{style:{fontSize:11,fontWeight:700,color:W}},rev)
-        ),
-        React.createElement('div',{style:{height:6,background:'rgba(255,255,255,0.08)',borderRadius:3}},
-          React.createElement('div',{style:{height:'100%',width:w,background:op,borderRadius:3}})
-        )
-      )),
-      React.createElement('div',{style:{marginTop:16,padding:'12px 14px',background:'rgba(16,185,129,0.1)',border:'1px solid rgba(16,185,129,0.25)',borderRadius:8}},
-        React.createElement('div',{style:{fontSize:11,color:GR,fontWeight:700}},'Low billing friction'),
-        React.createElement('div',{style:{fontSize:11,color:G,marginTop:4,lineHeight:1.5}},'IT admins already count students for internal records. SIWESlog surfaces that number automatically — no manual counting, no disputes over the invoice.')
-      )
+      React.createElement('div',{style:{fontSize:11,fontWeight:700,color:B,marginBottom:14}},'Illustrative school economics'),
+      React.createElement('div',{style:{background:'rgba(79,142,247,0.12)',border:'1px solid rgba(79,142,247,0.3)',borderRadius:10,padding:'18px 16px',marginBottom:14}},
+        React.createElement('div',{style:{fontSize:11,color:G,marginBottom:6}},'Example cohort · subject to school confirmation'),
+        React.createElement('div',{style:{fontSize:26,fontWeight:900,color:W,marginBottom:4}},'2,000 students × ₦1,000'),
+        React.createElement('div',{style:{fontSize:17,fontWeight:800,color:B}},'₦2,000,000 per session')
+      ),
+      React.createElement('div',{style:{fontSize:11,color:G,lineHeight:1.5}},'Revenue illustration only. Price, eligible cohort size, onboarding effort, support costs, and paid infrastructure costs must be validated in a pilot.'),
     )
   )
 )},
@@ -204,17 +194,19 @@ const slides=[
 // 9. TRACTION
 {bg:'#F8FAFF',render:()=>React.createElement('div',{style:{minHeight:'100%',display:'flex',flexDirection:'column',justifyContent:'center',padding:'40px 56px'}},
   React.createElement('div',{style:{fontSize:11,color:B,fontWeight:700,letterSpacing:'0.15em',textTransform:'uppercase',marginBottom:10}},'Traction'),
-  React.createElement('div',{style:{fontSize:26,fontWeight:800,color:N,lineHeight:1.2,marginBottom:8}},'Shipped solo. In production. Right now.'),
-  React.createElement('div',{style:{fontSize:14,color:'#475569',marginBottom:24}},'siweslog.com is a live, production-grade product — not a prototype or mockup.'),
+  React.createElement('div',{style:{fontSize:26,fontWeight:800,color:N,lineHeight:1.2,marginBottom:8}},'A working product. Early institutional validation.'),
+  React.createElement('div',{style:{fontSize:14,color:'#475569',marginBottom:24}},'Live at siweslog.com. School review is ongoing; no paid deployment or student usage is claimed yet.'),
   React.createElement('div',{style:{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:12}},
     ...[
       {icon:'✅',t:'Full-stack product live',d:'Node.js / Express / MongoDB backend, React / Vite frontend — deployed and accessible at siweslog.com.'},
       {icon:'✅',t:'Five user roles, all functional',d:'Student, Industry Supervisor, School Supervisor, IT Admin, and Super Admin — each with a dedicated, role-scoped dashboard.'},
       {icon:'✅',t:'Multi-tenant architecture',d:'One deployment serves any number of schools. Each institution operates in an isolated workspace under a shared codebase.'},
-      {icon:'✅',t:'Production infrastructure',d:'Railway backend, Vercel frontend, custom domain at siweslog.com, SSL certificate, and Resend for transactional email delivery.'},
+      {icon:'✅',t:'Live product stack',d:'Render backend, Vercel frontend, MongoDB Atlas, Cloudinary file storage, and Resend email. Current infrastructure plans are free tier.'},
       {icon:'✅',t:'PDF logbook export',d:'Generates a complete downloadable logbook from a student\'s approved weekly entries — the artefact needed for ITF submission.'},
       {icon:'✅',t:'Mobile responsive',d:'All five dashboards work on smartphones and desktops. Students fill logs on phones; IT admins manage from computers.'},
       {icon:'✅',t:'Email notifications',d:'OTP codes, supervisor approval links, welcome emails, and school approval notices are all delivered automatically.'},
+      {icon:'↗',t:'Institutional review',d:'SIWESlog has been presented to the founder’s school and is under review. This is a discussion in progress, not a confirmed pilot.'},
+      {icon:'◎',t:'Company structure',d:'SIWESlog is a product of ALOSEM Technologies, registered with Nigeria’s Corporate Affairs Commission.'},
       {icon:'✅',t:'Security hardened',d:'Rate limiting, HTTP security headers, CORS policy, parameter pollution protection, and a custom NoSQL injection and XSS sanitizer.'},
       {icon:'🔄',t:'Session management shipping',d:'Registration windows, cohort activation, session archiving, and zone-based supervisor assignment are currently in active development.'},
     ].map(({icon,t,d})=>React.createElement('div',{key:t,style:{background:W,border:'1px solid #E2E8F0',borderRadius:10,padding:'13px 14px'}},
@@ -225,17 +217,17 @@ const slides=[
   )
 )},
 
-// 10. WHY NOW
+// 10. GO-TO-MARKET
 {bg:N,render:()=>React.createElement('div',{style:{minHeight:'100%',display:'flex',flexDirection:'column',justifyContent:'center',padding:'40px 56px'}},
-  React.createElement('div',{style:{fontSize:11,color:B,fontWeight:700,letterSpacing:'0.15em',textTransform:'uppercase',marginBottom:10}},'Why Now'),
-  React.createElement('div',{style:{fontSize:28,fontWeight:800,color:W,lineHeight:1.2,marginBottom:32}},'The evidence is personal. The timing is immediate.'),
+  React.createElement('div',{style:{fontSize:11,color:B,fontWeight:700,letterSpacing:'0.15em',textTransform:'uppercase',marginBottom:10}},'Go-to-market'),
+  React.createElement('div',{style:{fontSize:28,fontWeight:800,color:W,lineHeight:1.2,marginBottom:32}},'A focused route from first school to repeatable adoption.'),
   React.createElement('div',{style:{display:'grid',gridTemplateColumns:'1fr 1fr',gap:16}},
     React.createElement('div',null,
-      React.createElement('div',{style:{fontSize:11,fontWeight:700,color:B,marginBottom:16}},'The founder timeline'),
+      React.createElement('div',{style:{fontSize:11,fontWeight:700,color:B,marginBottom:16}},'Beachhead and first customers'),
       ...[
-        {period:'April 2026',event:'Started building',detail:'Began developing SIWESlog while on active SIWES placement at SQI College of ICT, Osogbo — completing the same paper logbook process the product would replace.'},
-        {period:'June – July 2026',event:'Shipped to production',detail:'Full multi-tenant platform went live at siweslog.com with all five user roles, email delivery, and PDF export functional.'},
-        {period:'2025 / 2026 session',event:'Still on industrial training',detail:'The problem that started this has not changed. The paper logbook process continues in the same institution in the same form right now.'},
+        {period:'1 · First pilot',event:'Convert a school review into a pilot',detail:'Work with the SIWES or IT coordinator to confirm scope, onboarding steps, approval needs, and success measures.'},
+        {period:'2 · South-West focus',event:'Build from reachable institutions',detail:'Use school introductions and founder access to pursue nearby institutions first, then learn which buyer and approval path repeats.'},
+        {period:'3 · Evidence before expansion',event:'Measure and earn the next school',detail:'Track active students, completed logs, supervisor approvals, support effort, and willingness to pay before expanding outreach.'},
       ].map(({period,event,detail})=>React.createElement('div',{key:period,style:{display:'flex',gap:14,marginBottom:18}},
         React.createElement('div',{style:{flexShrink:0,display:'flex',flexDirection:'column',alignItems:'center'}},
           React.createElement('div',{style:{width:10,height:10,background:B,borderRadius:'50%',marginTop:4}}),
@@ -249,12 +241,12 @@ const slides=[
       ))
     ),
     React.createElement('div',null,
-      React.createElement('div',{style:{fontSize:11,fontWeight:700,color:B,marginBottom:16}},'Conditions that support adoption now'),
+      React.createElement('div',{style:{fontSize:11,fontWeight:700,color:B,marginBottom:16}},'What the first pilot must prove'),
       ...[
-        {icon:'🏛️',t:'Federal digital education mandate',d:'NITDA\'s push for digital tools in tertiary administration is creating openness to platforms like SIWESlog in ways that were not present a few years ago.'},
-        {icon:'📱',t:'Students are already mobile-first',d:'Nigerian university students use smartphones for communication, learning, and more — but their SIWES logbook is still on paper. The behaviour is ready; the tool is not.'},
-        {icon:'🔄',t:'Universities are open to digital admin',d:'Institutions that resisted digital tools before 2020 are now actively exploring them. The barrier to a first pilot conversation is lower than it has ever been.'},
-        {icon:'🕐',t:'The gap has stayed open during development',d:'SIWESlog was built in months. The problem it addresses has remained unresolved across the same period — confirmed by the founder still experiencing it.'},
+        {icon:'₦',t:'Price and buyer fit',d:'Test the proposed ₦1,000 per active student per session with the institution that controls onboarding and SIWES administration.'},
+        {icon:'✓',t:'Workflow adoption',d:'Measure whether students, industry supervisors, school supervisors, and IT admins complete their steps in one system.'},
+        {icon:'⌁',t:'Cost to serve',d:'Record onboarding time, support requests, email and file usage, and paid infrastructure needs at real pilot volume.'},
+        {icon:'↗',t:'Renewal evidence',d:'Seek a documented decision on whether the school would continue and pay for the following SIWES session.'},
       ].map(({icon,t,d})=>React.createElement('div',{key:t,style:{display:'flex',gap:10,marginBottom:14}},
         React.createElement('div',{style:{fontSize:18,flexShrink:0}},icon),
         React.createElement('div',null,
@@ -269,14 +261,14 @@ const slides=[
 // 11. COMPETITION
 {bg:'#F8FAFF',render:()=>React.createElement('div',{style:{minHeight:'100%',display:'flex',flexDirection:'column',justifyContent:'center',padding:'40px 56px'}},
   React.createElement('div',{style:{fontSize:11,color:B,fontWeight:700,letterSpacing:'0.15em',textTransform:'uppercase',marginBottom:10}},'Competitive Landscape'),
-  React.createElement('div',{style:{fontSize:26,fontWeight:800,color:N,lineHeight:1.2,marginBottom:8}},'No production platform is built end-to-end for the SIWES workflow.'),
-  React.createElement('div',{style:{fontSize:14,color:'#475569',marginBottom:24}},'What schools currently rely on is a collection of workarounds, not a purpose-built system.'),
+  React.createElement('div',{style:{fontSize:26,fontWeight:800,color:N,lineHeight:1.2,marginBottom:8}},'Schools can use paper, build in-house, or adopt a maintained platform.'),
+  React.createElement('div',{style:{fontSize:14,color:'#475569',marginBottom:24}},'SIWESlog competes with existing processes and internal projects. The pilot must prove that a shared product is worth adopting.'),
   React.createElement('div',{style:{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:12,marginBottom:20}},
     ...[
       {label:'Paper logbooks',status:'Current standard',desc:'The ITF-specified format. Used by default across all institutions. Fragile, produces no institutional data, and cannot be audited at scale.',bg:'#FEE2E2',tc:'#991B1B'},
-      {label:'Generic school portals',status:'Not fit for SIWES',desc:'School management systems exist but are not designed around the SIWES approval and logbook workflow. Students typically continue using paper alongside them.',bg:'#FEF3C7',tc:'#92400E'},
-      {label:'Ad hoc workarounds',status:'Informal',desc:'Excel sheets, WhatsApp groups, and email chains managed by individual IT coordinators. Effective for small cohorts; unworkable at scale and not auditable.',bg:'#FEF3C7',tc:'#92400E'},
-      {label:'SIWESlog',status:'Purpose-built',desc:'Designed end-to-end for the SIWES workflow. Role-based, cloud-hosted, multi-school, and in production — not an academic project.',bg:'#D1FAE5',tc:'#065F46'},
+      {label:'Generic school portals',status:'Adjacent systems',desc:'May handle student administration, while SIWES teams may still rely on paper, spreadsheets, WhatsApp, or email for logbooks and approvals.',bg:'#FEF3C7',tc:'#92400E'},
+      {label:'In-house student builds',status:'Local alternative',desc:'A student-built logbook system is under review at the founder’s school. Its deployment and long-term support are not yet confirmed.',bg:'#FEF3C7',tc:'#92400E'},
+      {label:'SIWESlog',status:'Purpose-built product',desc:'A live, multi-role platform designed for placement records, weekly logs, supervisor approvals, and PDF export across institutions.',bg:'#D1FAE5',tc:'#065F46'},
     ].map(({label,status,desc,bg,tc})=>React.createElement('div',{key:label,style:{background:bg,borderRadius:10,padding:'16px 14px'}},
       React.createElement('div',{style:{fontSize:10,fontWeight:800,color:tc,letterSpacing:'0.08em',textTransform:'uppercase',marginBottom:6}},status),
       React.createElement('div',{style:{fontSize:13,fontWeight:700,color:tc,marginBottom:8}},label),
@@ -287,10 +279,10 @@ const slides=[
     React.createElement('div',{style:{fontSize:11,fontWeight:700,color:N,marginBottom:12}},'What makes SIWESlog different'),
     React.createElement('div',{style:{display:'grid',gridTemplateColumns:'1fr 1fr',gap:10}},
       ...[
-        'Industry supervisor approval needs no account or login — unique in this category',
-        'Multi-school architecture — one platform, any number of institutions',
-        'All five SIWES stakeholders covered in a single system',
-        'Production-ready and live, not an academic prototype or wireframe',
+        'Industry supervisors can approve entries through a secure email link',
+        'One role-based workflow covers students, supervisors, and school administrators',
+        'A shared product can be maintained and improved across school deployments',
+        'Pilot evidence will determine where SIWESlog is stronger than local alternatives',
       ].map((s,i)=>React.createElement('div',{key:i,style:{display:'flex',gap:8,alignItems:'flex-start'}},
         React.createElement('div',{style:{color:GR,fontSize:14,flexShrink:0,marginTop:1}},'✓'),
         React.createElement('div',{style:{fontSize:12,color:'#334155',lineHeight:1.5}},s)
@@ -302,14 +294,14 @@ const slides=[
 // 12. ROADMAP
 {bg:'#F8FAFF',render:()=>React.createElement('div',{style:{minHeight:'100%',display:'flex',flexDirection:'column',justifyContent:'center',padding:'40px 56px'}},
   React.createElement('div',{style:{fontSize:11,color:B,fontWeight:700,letterSpacing:'0.15em',textTransform:'uppercase',marginBottom:10}},'Roadmap'),
-  React.createElement('div',{style:{fontSize:28,fontWeight:800,color:N,lineHeight:1.2,marginBottom:32}},'From working product to institutional infrastructure.'),
+  React.createElement('div',{style:{fontSize:28,fontWeight:800,color:N,lineHeight:1.2,marginBottom:22}},'Pilot milestones turn funding into adoption evidence.'),
   React.createElement('div',{style:{position:'relative'}},
     React.createElement('div',{style:{position:'absolute',left:15,top:8,bottom:8,width:2,background:'#E2E8F0'}}),
     ...[
-      {period:'Current build',color:B,items:['School approval workflow','Five role-based dashboards','Placement records and organogram','Weekly logs with two-step approvals','PDF logbook export','Transactional email delivery']},
-      {period:'Next build',color:'#818CF8',items:['Registration windows and cohort activation','Session archiving and reset','Billing and payment status tracking','Zone-based supervisor auto-assignment','Printable student registers for IT admins']},
-      {period:'Operational depth',color:'#A78BFA',items:['Session analytics per school','ITF-ready compliance exports','Bulk student import','Admin support tooling']},
-      {period:'Long-term',color:'#C4B5FD',items:['Employer placement intelligence','Outcome data for institutional reporting','Integration with regulatory body databases']},
+      {period:'Months 1–2 · Pilot readiness',color:B,items:['Agree pilot scope with school','Complete session and cohort controls','Set up usage and support tracking']},
+      {period:'Months 3–4 · Run the pilot',color:'#818CF8',items:['Onboard school and student cohort','Track registrations, logs, approvals','Measure email, storage, and support load']},
+      {period:'Months 5–6 · Validate the model',color:'#A78BFA',items:['Review adoption with the school','Test ₦1,000 proposed price','Calculate cost to serve per student']},
+      {period:'Next milestone · Earn expansion',color:'#C4B5FD',items:['Seek a paid renewal or second school','Use pilot evidence to guide investment','Expand only after buyer and unit fit']},
     ].map(({period,color,items})=>React.createElement('div',{key:period,style:{display:'flex',gap:20,marginBottom:18}},
       React.createElement('div',{style:{width:30,flexShrink:0,display:'flex',alignItems:'flex-start',paddingTop:3,justifyContent:'center'}},
         React.createElement('div',{style:{width:14,height:14,background:color,borderRadius:'50%',border:'3px solid #F8FAFF',zIndex:1,position:'relative'}})
@@ -325,49 +317,54 @@ const slides=[
 )},
 
 // 13. FOUNDER
-{bg:N,render:({isMobile}={})=>React.createElement('div',{style:{minHeight:'100%',boxSizing:'border-box',display:'flex',flexDirection:'column',justifyContent:isMobile?'flex-start':'center',padding:isMobile?'24px 18px':'28px 56px'}},
-  React.createElement('div',{style:{fontSize:11,color:B,fontWeight:700,letterSpacing:'0.15em',textTransform:'uppercase',marginBottom:isMobile?14:16,textAlign:'center'}},'The Founder'),
-  React.createElement('div',{style:{display:'grid',gridTemplateColumns:isMobile?'1fr':'182px 1fr',gap:isMobile?16:26,alignItems:'center',marginBottom:isMobile?14:16}},
-    React.createElement('div',{style:{display:'flex',flexDirection:'column',alignItems:'center',textAlign:'center'}},
-      React.createElement('div',{style:{width:isMobile?118:138,height:isMobile?118:138,background:'rgba(79,142,247,0.15)',border:'3px solid rgba(79,142,247,0.45)',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',fontSize:30,fontWeight:800,color:B,marginBottom:12,overflow:'hidden',boxShadow:'0 14px 38px rgba(0,0,0,0.28)'}},
-        React.createElement('img',{src:FOUNDER_PHOTO,alt:'Samuel Adeoye',onError:(e)=>{e.currentTarget.remove();e.currentTarget.parentElement.textContent='SA'},style:{width:'100%',height:'100%',objectFit:'cover',objectPosition:'50% 28%',display:'block'}})
-      ),
-      React.createElement('div',{style:{fontSize:isMobile?21:23,fontWeight:800,color:W,marginBottom:3}},'Samuel Adeoye'),
-      React.createElement('div',{style:{fontSize:12,color:B,lineHeight:1.35}},"500L Computer Eng. Student · Redeemer's University")
+{bg:N,render:({isMobile}={})=>React.createElement('div',{style:{minHeight:'100%',boxSizing:'border-box',display:'flex',flexDirection:'column',justifyContent:'center',padding:isMobile?'18px':'28px 42px'}},
+  React.createElement('div',{style:{fontSize:11,color:B,fontWeight:700,letterSpacing:'0.15em',textTransform:'uppercase',marginBottom:14}},'Founder · ALOSEM Technologies'),
+  React.createElement('div',{style:{display:'grid',gridTemplateColumns:isMobile?'1fr':'1fr 1fr',gap:isMobile?18:34,alignItems:'stretch',minHeight:isMobile?'auto':'min(68vh,620px)'}},
+    React.createElement('div',{style:{position:'relative',minHeight:isMobile?340:520,overflow:'hidden',background:'#17243B'}},
+      React.createElement('img',{src:FOUNDER_PHOTO,alt:'Samuel Adeoye',onError:(e)=>{e.currentTarget.style.display='none'},style:{position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'cover',objectPosition:'50% 24%'}}),
+      React.createElement('div',{style:{position:'absolute',inset:'45% 0 0',background:'linear-gradient(transparent,rgba(8,15,31,0.96))'}}),
+      React.createElement('div',{style:{position:'absolute',left:24,right:22,bottom:24}},
+        React.createElement('div',{style:{fontSize:isMobile?30:38,fontWeight:900,color:W,lineHeight:1,letterSpacing:'-0.04em',marginBottom:8}},'Samuel Adeoye'),
+        React.createElement('div',{style:{fontSize:13,color:'#C5D8FF',lineHeight:1.5}},'Founder & builder · Computer Engineering student')
+      )
     ),
-    React.createElement('div',{style:{background:'rgba(255,255,255,0.04)',border:'1px solid rgba(255,255,255,0.08)',borderRadius:12,padding:isMobile?'16px 18px':'18px 24px'}},
-      React.createElement('div',{style:{fontSize:15,fontWeight:800,color:W,marginBottom:8}},'Why I am building this'),
-      React.createElement('div',{style:{fontSize:isMobile?13:14,color:'#CBD5E1',lineHeight:1.62,fontStyle:'italic'}},'"I built SIWESlog while on SIWES at SQI College of ICT, Osogbo, as a software engineering student intern. One week, while filling my paper logbook, a colleague complained about the stress of the process. That moment matched what I was already experiencing, and I decided to build a less stressful, more accountable way to manage SIWES logbooks."')
+    React.createElement('div',{style:{display:'flex',flexDirection:'column',justifyContent:'center',padding:isMobile?'4px 2px':'10px 0'}},
+      React.createElement('div',{style:{fontSize:11,color:B,fontWeight:700,letterSpacing:'0.12em',textTransform:'uppercase',marginBottom:15}},'Why SIWESlog began'),
+      React.createElement('div',{style:{fontSize:isMobile?20:25,fontWeight:600,color:W,lineHeight:1.48,fontFamily:'Georgia,serif',marginBottom:26}},'“I built SIWESlog while on SIWES at SQI College of ICT, Osogbo, as a software engineering student intern. One week, while filling my paper logbook, a colleague complained about the stress of the process. That moment matched what I was already experiencing, and I decided to build a less stressful, more accountable way to manage SIWES logbooks.”'),
+      React.createElement('div',{style:{height:1,background:'rgba(255,255,255,0.16)',marginBottom:8}}),
+      ...[
+        {n:'01',t:'Lived the workflow',d:'Built from direct experience as a SIWES student.'},
+        {n:'02',t:'Built and shipped the product',d:'Solo full-stack builder of a live, multi-role platform.'},
+        {n:'03',t:'Founder of a registered company',d:'SIWESlog is a product of CAC-registered ALOSEM Technologies.'},
+      ].map(({n,t,d})=>React.createElement('div',{key:n,style:{display:'grid',gridTemplateColumns:'36px 1fr',gap:8,padding:'12px 0',borderBottom:'1px solid rgba(255,255,255,0.12)'}},
+        React.createElement('div',{style:{fontSize:11,color:B,fontWeight:800,paddingTop:2}},n),
+        React.createElement('div',null,
+          React.createElement('div',{style:{fontSize:13,fontWeight:700,color:W,marginBottom:3}},t),
+          React.createElement('div',{style:{fontSize:11,color:G,lineHeight:1.5}},d)
+        )
+      )),
+      React.createElement('a',{href:'https://samueladeoye.vercel.app',target:'_blank',rel:'noreferrer',style:{fontSize:11,color:B,textDecoration:'none',fontWeight:700,marginTop:14}},'samueladeoye.vercel.app →')
     )
-  ),
-  React.createElement('div',{style:{display:'grid',gridTemplateColumns:isMobile?'1fr':'1fr 1fr 1fr',gap:isMobile?10:12,width:'100%'}},
-    ...[
-      {icon:'🎯',t:'Lived the problem',d:'Built during my own SIWES, while using the same paper logbook process the platform replaces.'},
-      {icon:'💻',t:'Solo builder',d:'Built the first version myself, supported by faith, mentors, family, colleagues, and modern AI-assisted development tools.'},
-      {icon:'🏗️',t:'Shipping history',d:'Past work includes SmartAgriClimate, QuickConnect, CipherVault, YMC, and more.',link:'https://samueladeoye.vercel.app',linkText:'samueladeoye.vercel.app'},
-    ].map(({icon,t,d,link,linkText})=>React.createElement('div',{key:t,style:{background:'rgba(255,255,255,0.04)',border:'1px solid rgba(255,255,255,0.08)',borderRadius:8,padding:'12px 12px'}},
-      React.createElement('div',{style:{fontSize:17,marginBottom:5}},icon),
-      React.createElement('div',{style:{fontSize:12,fontWeight:700,color:W,marginBottom:4}},t),
-      React.createElement('div',{style:{fontSize:10.5,color:G,lineHeight:1.45}},d),
-      link&&React.createElement('a',{href:link,target:'_blank',rel:'noreferrer',style:{display:'inline-block',marginTop:5,fontSize:10.5,color:B,textDecoration:'none',fontWeight:700}},linkText)
-    ))
   )
 )},
 
 // 14. THE ASK
 {bg:'#F8FAFF',render:()=>React.createElement('div',{style:{minHeight:'100%',display:'flex',flexDirection:'column',justifyContent:'center',padding:'40px 56px'}},
   React.createElement('div',{style:{fontSize:11,color:B,fontWeight:700,letterSpacing:'0.15em',textTransform:'uppercase',marginBottom:10}},'The Ask'),
-  React.createElement('div',{style:{fontSize:26,fontWeight:800,color:N,lineHeight:1.2,marginBottom:8}},'The core product exists. The next milestone is institutional validation.'),
-  React.createElement('div',{style:{fontSize:14,color:'#475569',marginBottom:24}},'SIWESlog is ready for pilots that test adoption, support load, pricing, and the next set of administrative workflows.'),
+  React.createElement('div',{style:{fontSize:26,fontWeight:800,color:N,lineHeight:1.2,marginBottom:8}},'Seeking ₦5,000,000 in pilot capital.'),
+  React.createElement('div',{style:{fontSize:14,color:'#475569',marginBottom:8}},'Working funding target for a six-month validation phase. Final budget to be refined with pilot scope and partner introductions; no valuation or equity terms are being asserted here.'),
+  React.createElement('div',{style:{fontSize:12,color:'#334155',fontWeight:700,marginBottom:12}},'Also seeking introductions to university SIWES and IT decision-makers.'),
+  React.createElement('div',{style:{fontSize:11,color:'#64748B',marginBottom:18}},'Today: infrastructure services are on free plans ($0); domain purchase was about $12. The $200/year LLM subscription is a founder development tool, not yet a measured cost to serve.'),
   React.createElement('div',{style:{display:'grid',gridTemplateColumns:'1fr 1fr',gap:20}},
     React.createElement('div',{style:{background:W,border:'1px solid #E2E8F0',borderRadius:12,padding:'20px'}},
-      React.createElement('div',{style:{fontSize:12,fontWeight:700,color:B,marginBottom:14}},'What we are seeking'),
+      React.createElement('div',{style:{fontSize:12,fontWeight:700,color:B,marginBottom:14}},'Use of funds · planning estimate'),
       ...[
-        {icon:'🏦',t:'Institutional introductions',d:'Access to university decision-makers who can approve pilot cohorts and provide product feedback from the ground up.'},
-        {icon:'🧭',t:'Go-to-market support',d:'Guidance on procurement cycles, budget timing, onboarding workflows, pricing structure, and stakeholder navigation.'},
-        {icon:'💡',t:'Pilot funding',d:'To harden session management, support early onboarding, and collect credible usage evidence from real institutions.'},
-      ].map(({icon,t,d})=>React.createElement('div',{key:t,style:{display:'flex',gap:10,marginBottom:12,alignItems:'flex-start'}},
-        React.createElement('div',{style:{fontSize:18,flexShrink:0}},icon),
+        {t:'₦1.5m · Product readiness',d:'Session controls, reliability, privacy and operational hardening.'},
+        {t:'₦1.5m · Pilot delivery',d:'School onboarding, travel, training, and implementation support.'},
+        {t:'₦1.0m · Pilot operations',d:'Student and supervisor support, usage tracking, and feedback.'},
+        {t:'₦1.0m · Runway and contingency',d:'Paid infrastructure as usage requires, essential tools, and a reserve.'},
+      ].map(({t,d})=>React.createElement('div',{key:t,style:{display:'flex',gap:10,marginBottom:12,alignItems:'flex-start'}},
+        React.createElement('div',{style:{width:4,height:32,background:B,borderRadius:2,flexShrink:0,marginTop:2}}),
         React.createElement('div',null,
           React.createElement('div',{style:{fontSize:12,fontWeight:700,color:N,marginBottom:3}},t),
           React.createElement('div',{style:{fontSize:11,color:'#64748B',lineHeight:1.55}},d)
@@ -376,12 +373,12 @@ const slides=[
     ),
     React.createElement('div',null,
       React.createElement('div',{style:{background:N,borderRadius:12,padding:'20px',marginBottom:12}},
-        React.createElement('div',{style:{fontSize:12,fontWeight:700,color:B,marginBottom:12}},'Why SIWESlog wins'),
+        React.createElement('div',{style:{fontSize:12,fontWeight:700,color:B,marginBottom:12}},'Six-month milestone'),
         ...[
-          'Purpose-built for a specific workflow instead of a generic school portal',
-          'A working product foundation, not only a concept or slide deck',
-          'A natural recurring revenue path tied to the academic calendar',
-          'Multi-school architecture built for institution-level adoption from day one',
+          'Milestone: launch one institution pilot and document adoption',
+          'Validate ₦1,000/student/session with the school buyer',
+          'Measure service costs and operational support per cohort',
+          'Use evidence to secure a paid renewal or the next school',
         ].map((s,i)=>React.createElement('div',{key:i,style:{display:'flex',gap:8,marginBottom:8}},
           React.createElement('div',{style:{color:GR,fontSize:14,flexShrink:0}},'✓'),
           React.createElement('div',{style:{fontSize:12,color:'#CBD5E1',lineHeight:1.5}},s)
@@ -400,7 +397,7 @@ const slides=[
 {bg:N,render:()=>React.createElement('div',{style:{minHeight:'100%',display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',textAlign:'center',padding:'40px 56px'}},
   React.createElement('div',{style:{fontSize:11,color:B,fontWeight:700,letterSpacing:'0.15em',textTransform:'uppercase',marginBottom:18}},'Thank You'),
   React.createElement('div',{style:{fontSize:46,fontWeight:900,color:W,lineHeight:1.05,marginBottom:12}},'Questions?'),
-  React.createElement('div',{style:{fontSize:15,color:G,maxWidth:560,lineHeight:1.7,marginBottom:28}},'SIWESlog is ready for serious institutional conversations, product demos, and pilot discussions.'),
+  React.createElement('div',{style:{fontSize:15,color:G,maxWidth:560,lineHeight:1.7,marginBottom:28}},'Seeking pilot-school introductions, ecosystem support, and funding partners to validate SIWESlog with an institution.'),
   React.createElement('div',{style:{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:12,width:'100%',maxWidth:780}},
     ...[
       {label:'WhatsApp',value:'07039094213',href:'https://wa.me/2347039094213'},
